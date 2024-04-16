@@ -14,7 +14,7 @@
     <shape android:shape="rectangle">
         <corners android:radius="8dp"/>
         <stroke android:color="#00FFFFFF" android:width="2dp"/>
-        <solid android:color="#00000000"/>
+        <solid android:color="#FFFFFF"/>
         <stroke android:width="3dp" android:color="@color/sliderTextGrey"/>
         <corners android:radius="14dp" />
     </shape>

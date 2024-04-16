@@ -25,21 +25,22 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MessageListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if(viewType == MSG_TYPE_RIGHT){
             View view = inflater.inflate(R.layout.chat_item,parent,false);
             return new ViewHolder(view);
         }
         else{
-            View view = inflater.inflate(R.layout.chat_item,parent,false);
+            View view = inflater.inflate(R.layout.chat_item_ai,parent,false);
             return new ViewHolder(view);
         }
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MessageListAdapter.ViewHolder holder, int position) {
         Message message = messages.get(position);
-
+        holder.user.setText(message.getSender());
+        holder.showMessage.setText(message.getMessage());
     }
 
     @Override
@@ -49,14 +50,21 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
 
     @Override
     public int getItemViewType(int position) {
-        return super.getItemViewType(position);
+        if(messages.get(position).isBot()){
+            return MSG_TYPE_LEFT;
+        }else{
+            return MSG_TYPE_RIGHT;
+        }
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView show_message;
+        public TextView showMessage;
+        public TextView user;
+
         ViewHolder(View view){
             super(view);
-            show_message = view.findViewById(R.id.message);
+            user = view.findViewById(R.id.sender);
+            showMessage = view.findViewById(R.id.message);
         }
     }
 }

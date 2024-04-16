@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">Digital Hunt</string>
     <string name="home_name">Home</string>
     <string name="favorite_name">Favorite</string>
     <string name="profile_name">Profile</string>

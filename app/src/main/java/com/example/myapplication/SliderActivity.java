@@ -1,12 +1,18 @@
 package com.example.myapplication;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
+
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
 public class SliderActivity extends AppCompatActivity {
@@ -21,6 +27,7 @@ public class SliderActivity extends AppCompatActivity {
     private Button btnSkip;
     private TextView slideRight;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +68,7 @@ public class SliderActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(SliderActivity.this, MainActivity.class);
                 startActivity(intent);
+                writeToFile(SliderActivity.this,"login");
                 finish();
             }
         });
@@ -102,4 +110,13 @@ public class SliderActivity extends AppCompatActivity {
         @Override
         public void onPageScrollStateChanged(int state) {}
     };
+    private void writeToFile(Context context, String fileName) {
+        try {
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput(fileName +".txt",MODE_APPEND));
+            outputStreamWriter.close();
+        }
+        catch (IOException e) {
+            Log.e("Exception", "File write failed: " + e);
+        }
+    }
 }
