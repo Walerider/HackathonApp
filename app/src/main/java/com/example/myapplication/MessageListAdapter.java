@@ -46,6 +46,12 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
     public int getItemCount() {
         return messages.size();
     }
+
+    @Override
+    public int getItemViewType(int position) {
+        return super.getItemViewType(position);
+    }
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView show_message;
         ViewHolder(View view){
