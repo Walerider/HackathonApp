@@ -2,4 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="sliderBlue">#3FCBFF</color>
+    <color name="sliderWhite">#D9D9D9</color>
+    <color name="sliderTextGrey">#8F9399</color>
+    <color name="backWhite">#FFFFFF</color>
 </resources>
