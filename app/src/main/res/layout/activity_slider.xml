@@ -18,6 +18,8 @@
 
     </androidx.viewpager.widget.ViewPager>
 
+
+
     <LinearLayout
         android:id="@+id/idLLDots"
         app:layout_constraintVertical_bias="0.9"
@@ -86,16 +88,7 @@
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btnSkip"
-        app:layout_constraintVertical_bias="0.9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Пропустить"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -114,6 +107,22 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/idViewPager"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnSkip"
+        android:background="@drawable/roundstyle"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="Вперёд!"
+        android:textSize="24dp"
+        android:fontFamily="@font/tele2_textsans_regular_short"
+        app:layout_constraintVertical_bias="0.9"
+        app:layout_constraintWidth_percent="0.60"
+        app:layout_constraintHeight_percent="0.10"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

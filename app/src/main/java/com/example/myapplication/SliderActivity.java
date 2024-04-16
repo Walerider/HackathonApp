@@ -8,19 +8,18 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 import java.util.ArrayList;
-import android.view.View;
 
 public class SliderActivity extends AppCompatActivity {
 
     private ViewPager viewPager;
     private SliderAdapter sliderAdapter;
     private ArrayList<SliderData> sliderList;
-    private Button skipBtn;
     private TextView indicatorSlideOneTV;
     private TextView indicatorSlideTwoTV;
     private TextView indicatorSlideThreeTV;
     private TextView indicatorSlideFourTV;
     private Button btnSkip;
+    private TextView slideRight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +33,7 @@ public class SliderActivity extends AppCompatActivity {
         indicatorSlideFourTV = findViewById(R.id.idTVSlideFour);
         btnSkip = findViewById(R.id.btnSkip);
 
-
+        slideRight = findViewById(R.id.idTVSliderDescription);
 
         sliderList = new ArrayList<>();
         sliderList.add(new SliderData(R.drawable.first_slider));
@@ -42,11 +41,18 @@ public class SliderActivity extends AppCompatActivity {
         sliderList.add(new SliderData(R.drawable.third_slider));
         sliderList.add(new SliderData(R.drawable.fourth));
 
-        sliderAdapter = new SliderAdapter(this, sliderList);
+        sliderAdapter = new SliderAdapter(this, sliderList, new SliderAdapter.OnSlideChangeListener() {
+            @Override
+            public void onSlideChanged(int position) {
+                if (position == sliderList.size()) {
+                    btnSkip.setVisibility(View.VISIBLE);
+                } else {
+                    btnSkip.setVisibility(View.GONE);
+                }
+            }
+        });
         viewPager.setAdapter(sliderAdapter);
         viewPager.addOnPageChangeListener(viewListener);
-
-        Button btnSkip = findViewById(R.id.btnSkip);
 
         btnSkip.setVisibility(View.GONE);
 
@@ -71,21 +77,25 @@ public class SliderActivity extends AppCompatActivity {
                 indicatorSlideThreeTV.setTextColor(getResources().getColor(R.color.sliderTextGrey));
                 indicatorSlideFourTV.setTextColor(getResources().getColor(R.color.sliderTextGrey));
                 indicatorSlideOneTV.setTextColor(getResources().getColor(R.color.sliderBlue));
+                btnSkip.setVisibility(View.GONE);
             } else if (position == 1) {
-                indicatorSlideTwoTV.setTextColor(getResources().getColor(R.color.sliderBlue));
+                indicatorSlideOneTV.setTextColor(getResources().getColor(R.color.sliderBlue));
                 indicatorSlideThreeTV.setTextColor(getResources().getColor(R.color.sliderTextGrey));
                 indicatorSlideFourTV.setTextColor(getResources().getColor(R.color.sliderTextGrey));
-                indicatorSlideOneTV.setTextColor(getResources().getColor(R.color.sliderBlue));
+                indicatorSlideTwoTV.setTextColor(getResources().getColor(R.color.sliderBlue));
+                btnSkip.setVisibility(View.GONE);
             } else if (position == 2) {
+                indicatorSlideOneTV.setTextColor(getResources().getColor(R.color.sliderBlue));
+                indicatorSlideTwoTV.setTextColor(getResources().getColor(R.color.sliderBlue));
+                indicatorSlideFourTV.setTextColor(getResources().getColor(R.color.sliderTextGrey));
+                indicatorSlideThreeTV.setTextColor(getResources().getColor(R.color.sliderBlue));
+                btnSkip.setVisibility(View.GONE);
+            } else if (position == 3) {
+                indicatorSlideOneTV.setTextColor(getResources().getColor(R.color.sliderBlue));
                 indicatorSlideTwoTV.setTextColor(getResources().getColor(R.color.sliderBlue));
                 indicatorSlideThreeTV.setTextColor(getResources().getColor(R.color.sliderBlue));
-                indicatorSlideFourTV.setTextColor(getResources().getColor(R.color.sliderTextGrey));
-                indicatorSlideOneTV.setTextColor(getResources().getColor(R.color.sliderBlue));
-            } else {
-                indicatorSlideTwoTV.setTextColor(getResources().getColor(R.color.sliderBlue));
-                indicatorSlideThreeTV.setTextColor(getResources().getColor(R.color.sliderBlue));
-                indicatorSlideFourTV.setTextColor(getResources().getColor(R.color.sliderTextGrey));
-                indicatorSlideOneTV.setTextColor(getResources().getColor(R.color.sliderBlue));
+                indicatorSlideFourTV.setTextColor(getResources().getColor(R.color.sliderBlue));
+                btnSkip.setVisibility(View.VISIBLE);
             }
         }
 

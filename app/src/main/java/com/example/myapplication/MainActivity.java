@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         NavController navController = navHostFragment.getNavController();
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
-        startActivity(new Intent(this, SliderActivity.class));
+        startActivity(new Intent(this, SliderActivity.class ));
     }
 
     @Override

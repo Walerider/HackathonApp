@@ -24,14 +24,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/idIVSlider"
+        android:fontFamily="@font/tele2_textsans_regular_short"
         android:gravity="center"
         android:padding="10dp"
-        android:text="Листайте вправо"
+        android:text="@string/slide_to_right"
         android:textAlignment="center"
         android:textColor="@color/sliderTextGrey"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/idIVSlider"
         app:layout_constraintVertical_bias="0.483" />
 </androidx.constraintlayout.widget.ConstraintLayout>

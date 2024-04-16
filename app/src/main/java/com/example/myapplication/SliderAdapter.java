@@ -14,16 +14,21 @@ public class SliderAdapter extends PagerAdapter {
     private Context context;
     private ArrayList<SliderData> sliderList;
     private Button btnSkip;
+    private OnSlideChangeListener slideChangeListener;
 
-    public SliderAdapter(Context context, ArrayList<SliderData> sliderList) {
+    public SliderAdapter(Context context, ArrayList<SliderData> sliderList, OnSlideChangeListener listener) {
         this.context = context;
         this.sliderList = sliderList;
-        this.btnSkip = btnSkip;
+        this.slideChangeListener = listener;
     }
 
     @Override
     public int getCount() {
         return sliderList.size();
+    }
+
+    public interface OnSlideChangeListener {
+        void onSlideChanged(int position);
     }
 
     @Override
@@ -38,16 +43,22 @@ public class SliderAdapter extends PagerAdapter {
 
         ImageView imageView = view.findViewById(R.id.idIVSlider);
 
+        TextView slideDescription = view.findViewById(R.id.idTVSliderDescription);
+
         SliderData sliderData = sliderList.get(position);
 
         imageView.setImageResource(sliderData.slideImage);
 
         container.addView(view);
 
-        if (position == getCount() - 1) {
-            btnSkip.setVisibility(View.VISIBLE);
+        if (position == getCount() - 1 && slideChangeListener != null) {
+            slideChangeListener.onSlideChanged(position);
+        }
+
+        if (position == 3) {
+            slideDescription.setVisibility(View.GONE);
         } else {
-            btnSkip.setVisibility(View.GONE);
+            slideDescription.setVisibility(View.VISIBLE);
         }
 
         return view;
