@@ -111,8 +111,8 @@
 
     <Button
         android:id="@+id/btnSkip"
-        android:background="@drawable/roundstyle"
         android:layout_width="0dp"
+        android:backgroundTint="@color/sliderBlue"
         android:layout_height="0dp"
         android:text="Вперёд!"
         android:textSize="24dp"
