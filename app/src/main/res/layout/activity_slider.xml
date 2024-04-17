@@ -117,6 +117,7 @@
         android:text="Вперёд!"
         android:textSize="24dp"
         android:fontFamily="@font/tele2_textsans_regular_short"
+        app:backgroundTint="@color/sliderBlue"
         app:layout_constraintVertical_bias="0.9"
         app:layout_constraintWidth_percent="0.60"
         app:layout_constraintHeight_percent="0.10"

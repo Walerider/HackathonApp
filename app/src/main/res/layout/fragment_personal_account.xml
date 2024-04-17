@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/backWhite"
     tools:context=".PersonalAccountFragment">
 
 
@@ -149,34 +150,16 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.635" />
 
-    <TextView
-        android:id="@+id/inDev"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="212dp"
-        android:fontFamily="@font/tele2_textsans_regular_short"
-        android:text="в разработке..."
-        android:textColor="@color/sliderTextGrey"
-        android:textSize="23dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.04"
-        app:layout_constraintHorizontal_bias="0.513"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/soonSkin"
-        app:layout_constraintVertical_bias="0.0"
-        app:layout_constraintWidth_percent="0.37" />
-
     <Button
         android:id="@+id/enterTeleTwo"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/blue_button_background"
         android:fontFamily="@font/tele2_displayserif_regular_shortweb"
-        android:gravity="bottom|end"
+        android:gravity="center"
         android:text="Вход в кабинет TELE2"
         android:textColor="@color/white"
-        android:textSize="25dp"
+        android:textSize="23sp"
         app:backgroundTint="@color/buttonsLightBlue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
