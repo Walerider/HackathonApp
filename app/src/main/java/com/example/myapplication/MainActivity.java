@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
     ImageButton sendButton;
     EditText enterText;
     View blockingInput;
+    int counterMy = 0;
     RecyclerView recyclerView;
     ArrayList<Message> messages;
     MessageListAdapter adapter;
@@ -66,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getLogin();
+        getCounter();
         FragmentManager manager = getFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         enterText = findViewById(R.id.enter_text);
@@ -81,26 +83,60 @@ public class MainActivity extends AppCompatActivity {
         botImage.setOnClickListener(v ->{
             getSupportFragmentManager().beginTransaction().replace(R.id.container,new PersonalAccountFragment()).commit();
         });
+
         sendButton.setOnClickListener(v ->{
             if(enterText.getText().toString().length() != 0){
-                sendMessage(login,enterText.getText().toString(),false);
-                adapter.notifyDataSetChanged();
-                String ans =enterText.getText().toString();
-                enterText.setText("");
-                getResponse(ans, true);
-                adapter.notifyDataSetChanged();
-                blockingInput.setClickable(true);
-                blockingInput.setBackgroundColor(R.color.black);
-                botImage.setImageResource(R.drawable.bot_write);
-                new CountDownTimer(3000, 1000) {
-                    public void onTick(long millisUntilFinished) {}
-                    public void onFinish() {
-                        sendMessage("Сигналл", savedMessage.getText().toString(),true);
-                        blockingInput.setBackgroundColor(Color.TRANSPARENT);
-                        blockingInput.setClickable(false);
-                        botImage.setImageResource(R.drawable.base_bot);
-                    }
-                }.start();
+                if(messages.size() == 2){
+                    sendMessage(login,enterText.getText().toString(),false);
+                    adapter.notifyDataSetChanged();
+                    String ans =enterText.getText().toString();
+                    enterText.setText("");
+                    login = ans;
+                    adapter.notifyDataSetChanged();
+                    blockingInput.setClickable(true);
+                    blockingInput.setBackgroundColor(R.color.black);
+                    botImage.setImageResource(R.drawable.bot_write);
+
+                    new CountDownTimer(3000, 1000) {
+                        public void onTick(long millisUntilFinished) {}
+                        public void onFinish() {
+                            //sendMessage("Сигналл", savedMessage.getText().toString(),true);
+                            sendMessage("Сигналл", "В темном лесу, где лучи света едва проникали сквозь густую листву, жил одинокий странник по имени Элиас. Он был мудрым и наблюдательным, всегда готовым к новым испытаниям. Однажды, прогуливаясь по лесу, Элиас услышал загадочный шепот, словно призывающий его к чему-то важному.",true);
+                            sendMessage("Сигналл", "Следуя за звуками, странник наткнулся на яркое озеро, на поверхности которого пляшущие отблески света создавали завораживающий образ. Но среди этой красоты он заметил странное движение под водой, словно что-то пыталось его привлечь. Подойдя ближе, Элиас разглядел зазубренные крючья, скрытые под блестящими лучами." ,true);
+                            sendMessage("Сигналл", "\"Фишинг\", - прошептал он, осознавая, что это ловушка для ничего не подозревающих жертв. Сквозь метафору озера и его мерцающей поверхности он понял, что в интернете тоже есть хитроумные уловки, способные обмануть даже самых бдительных. Элиас решил остерегаться и быть бдительным, как в лесу, так и в виртуальном мире.",true);
+                            sendMessage("Сигналл", "Это конечно всё хорошо, но всё же что такое фишинг в наше время?",true);
+                            blockingInput.setBackgroundColor(Color.TRANSPARENT);
+                            blockingInput.setClickable(false);
+                            botImage.setImageResource(R.drawable.base_bot);
+                        }
+                    }.start();
+                }else{
+                    sendMessage(login,enterText.getText().toString(),false);
+                    adapter.notifyDataSetChanged();
+                    String ans =enterText.getText().toString();
+                    enterText.setText("");
+                    adapter.notifyDataSetChanged();
+                    blockingInput.setClickable(true);
+                    blockingInput.setBackgroundColor(R.color.black);
+                    botImage.setImageResource(R.drawable.bot_write);
+                    new CountDownTimer(5000, 1000) {
+                        public void onTick(long millisUntilFinished) {}
+                        public void onFinish() {
+                            blockingInput.setBackgroundColor(Color.TRANSPARENT);
+                            blockingInput.setClickable(false);
+                            if(ans.toLowerCase().contains("вид кибератаки")){
+                                sendMessage("Сигналл","Правильно! Следующий вопрос",true);
+                                botImage.setImageResource(R.drawable.bot_happy);
+                                rewriteToFile("2",MainActivity.this,"counter");
+                            }else{
+                                getResponse("Напиши подсказку на вопрос - Что такое фишинг?  используя ключевые слова - вид кибератаки(ключевые слова нельзя менять)", true);
+                                sendMessage("Сигналл",savedMessage.getText().toString(),true);
+                                botImage.setImageResource(R.drawable.bot_q);
+                                adapter.notifyDataSetChanged();
+                            }
+                        }
+                    }.start();
+                }
             }
         });
     }
@@ -110,6 +146,12 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         if(login != null && messages.size() == 0) {
             sendMessage("Сигналл", "Приветствую, путешественник! Я - бот \"Сигналл\", твой верный проводник в мире цифровых тайн и опасностей. Однако, случился неприятный инцидент - из-за бага в моей системе я временно потерял свои знания о кибербезопасности цифровизации и даже искусственному интеллекту ! Теперь я могу лишь подсказывать тебе, но без твоей помощи я не смогу восстановить свои данные.", true);
+            sendMessage("Сигналл", "Привет! Как мне к тебе обращаться? Напиши своё имя, пожалуйста.", true);
+        }
+        if(!messages.contains("Что такое программное обеспечение?") && messages.size() == 6){
+            switchCase("Что такое фишинг");
+            writeToFile("1",this,"counter");
+
         }
     }
 
@@ -175,6 +217,15 @@ public class MainActivity extends AppCompatActivity {
         catch (IOException e) {
             Log.e("Exception", "File write failed: " + e);
         }
+    }private void rewriteToFile(String data, Context context, String fileName) {
+        try {
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput(fileName +".txt",MODE_PRIVATE));
+            outputStreamWriter.write(data);
+            outputStreamWriter.close();
+        }
+        catch (IOException e) {
+            Log.e("Exception", "File write failed: " + e);
+        }
     }
     private void getLogin(){
         InputStream fin = null;
@@ -195,6 +246,38 @@ public class MainActivity extends AppCompatActivity {
             in.close();
         }catch (FileNotFoundException e){
             startActivity(new Intent(this, SliderActivity.class));
+        }
+        catch (IOException e) {
+            Log.e("login123123", "Can not read file: " + e);
+        }
+        finally {
+            try {
+                if(fin != null)
+                    fin.close();
+            } catch (IOException e) {
+                Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }
+    }private void getCounter(){
+        InputStream fin = null;
+        try {
+
+            fin = openFileInput("counter.txt");
+            BufferedReader in = new BufferedReader(new InputStreamReader(fin,"UTF8"));
+            String counter = "";
+            String i;
+            while((i=in.readLine()) != null){
+                counter += i;
+            }
+            if(counter.equals("1")){
+                counterMy = 1;
+            }else if(counter.equals("2")){
+                counterMy = 2;
+            }else if(counter.equals("3")){
+                counterMy = 3;
+            }
+            in.close();
+        }catch (FileNotFoundException e){
         }
         catch (IOException e) {
             Log.e("login123123", "Can not read file: " + e);
@@ -241,6 +324,7 @@ public class MainActivity extends AppCompatActivity {
                         jsonObject = new JSONObject(body);
                         JSONArray jsonArray = jsonObject.getJSONArray("choices");
                         String textResult = jsonArray.getJSONObject(0).getJSONObject("message").getString("content");
+                        Log.e("123",textResult);
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -292,5 +376,17 @@ public class MainActivity extends AppCompatActivity {
             });
         }
     }
-
+    void switchCase(String question){
+        switch (question) {
+            case "Что такое программное обеспечение?":
+                sendMessage("Сигналл", "Что такое программное обеспечение?", true);
+                break;
+            case "Что такое кибербезопасность?":
+                sendMessage("Сигналл", "Что такое кибербезопасность?", true);
+                break;
+            case "Что такое облачные технологии?":
+                sendMessage("Сигналл", "Что такое облачные технологии?", true);
+                break;
+        }
+    }
 }

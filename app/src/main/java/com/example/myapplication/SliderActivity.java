@@ -27,7 +27,6 @@ public class SliderActivity extends AppCompatActivity {
     private Button btnSkip;
     private TextView slideRight;
 
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

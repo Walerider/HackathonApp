@@ -58,7 +58,8 @@
             android:id="@+id/send_button"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:src="@drawable/ic_favorite"
+            android:src="@drawable/paper_plane"
+
             android:background="@drawable/edit_text_corners"
             app:layout_constraintBottom_toBottomOf="parent"
             app:backgroundTint="#3FCBFF"
